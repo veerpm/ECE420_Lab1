@@ -3,7 +3,7 @@ CFLAGS = -g -Wall
 all: main serial
 
 main: main.o lab1_IO.o
-	gcc -o main main.o lab1_IO.o
+	gcc -o main main.o lab1_IO.o -lm
 
 serial: serial.o lab1_IO.o
 	gcc -o serial serial.o lab1_IO.o
