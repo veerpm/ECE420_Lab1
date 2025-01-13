@@ -11,16 +11,16 @@ double start, end;
 void* threadfunc(void* rank) {
     long my_rank = (long) rank;
     int sqrt_p = (int) sqrt(thread_count);
-    int block_size = n / sqrt_p;
+    int boundary_size = n / sqrt_p;
 
     int x = my_rank / sqrt_p;
     int y = my_rank % sqrt_p;
 
     // Determine the boundaries of the block
-    int start_row = x * block_size;
-    int end_row = (x + 1) * block_size;
-    int start_col = y * block_size;
-    int end_col = (y + 1) * block_size;
+    int start_row = x * boundary_size;
+    int end_row = (x + 1) * boundary_size;
+    int start_col = y * boundary_size;
+    int end_col = (y + 1) * boundary_size;
 
     for (int i = start_row; i < end_row; i++) {
         for (int j = start_col; j < end_col; j++) {
@@ -69,6 +69,7 @@ int main(int argc, char const *argv[]){
 
     Lab1_saveoutput(C, &n, end - start);
 
+    free(threads);
     for (int i = 0; i < n; i++) {
         free(A[i]);
         free(B[i]);
